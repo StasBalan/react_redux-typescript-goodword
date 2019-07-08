@@ -7,9 +7,9 @@ export function filterVocabulary(newVocabulary: Vocabulary):VocabularyActionType
     }
 }
 
-export function addWordToVocabulary(payload: Vocabulary):VocabularyActionTypes {
+export function addWordToVocabulary(wordToLearn: Vocabulary):VocabularyActionTypes {
     return {
         type: ADD_WORD_TO_VOCABULARY,
-        payload: payload
+        payload: wordToLearn
     }
 }
