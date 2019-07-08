@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
 
+import Cards from '../../components/Cards';
+
 const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-       sdf
+       Home
       </header>
+      <Cards/>
     </div>
   );
 }
