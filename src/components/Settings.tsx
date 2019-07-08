@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { INITIAL_RANGE } from '../constants/constants';
+
 interface SettingsState {
     range: number;
 };
@@ -7,14 +9,14 @@ interface SettingsState {
 class Settings extends Component<{}, SettingsState> {
 
     state: SettingsState = {
-        range: 1
+        range: INITIAL_RANGE
     };
 
     private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let value = Number(e.target.value);
-        console.log('save range',value, typeof value);
+        const range = Number(e.target.value);
+        console.log('save range', range, typeof range);
         this.setState({
-            range: value
+            range: range
         });
     }
 
