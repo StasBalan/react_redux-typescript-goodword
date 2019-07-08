@@ -9,6 +9,10 @@ export interface Vocabulary {
     length: number; //?
 }
 
+export interface VocabularyArray {
+    vocabulary: Vocabulary
+}
+
 interface FilterVocabularyAction {
     type: typeof FILTER_VOCABULARY;
     payload: Vocabulary;
