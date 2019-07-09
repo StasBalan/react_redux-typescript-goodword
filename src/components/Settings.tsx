@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 
 import { INITIAL_RANGE } from '../constants/constants';
+import { AppState } from '../store/store';
+
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions';
 
 interface SettingsState {
     range: number;
 };
 
-class Settings extends Component<{}, SettingsState> {
+interface AppProps {
+    vocabulary: string[];
+    wordToLearn?: string[];
+    addWordToVocabulary: (wordToLearn: string[]) => void;
+    filterVocabulary: (vocabulary: string[]) => void;
+}
+
+class Settings extends Component<AppProps, SettingsState> {
 
     state: SettingsState = {
         range: INITIAL_RANGE
@@ -21,7 +32,25 @@ class Settings extends Component<{}, SettingsState> {
     }
 
     private onSave = () => {
+        const { vocabulary } = this.props
+
         console.log('you save settings', this.state.range);
+        console.log(vocabulary);
+
+        const newVocabulary = vocabulary;
+        const wordsToLearn = [];
+
+        for (let i = 0; i < this.state.range; i++) {
+            const rand = Math.floor(Math.random() * newVocabulary.length);
+            wordsToLearn.push(newVocabulary[rand]);
+        }
+
+        console.log(wordsToLearn, newVocabulary);
+
+        if(wordsToLearn) {
+            this.props.addWordToVocabulary(wordsToLearn);
+            this.props.filterVocabulary(newVocabulary);
+        }
     }
 
     render() {
@@ -44,4 +73,8 @@ class Settings extends Component<{}, SettingsState> {
     }
 }
 
-export default Settings;
+const mapStateToProps = (state: AppState) => ({
+    vocabulary: state.vocabulary.vocabulary
+});
+
+export default connect(mapStateToProps, actions)(Settings);

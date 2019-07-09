@@ -1,10 +1,11 @@
-import { VocabularyArray, FILTER_VOCABULARY, ADD_WORD_TO_VOCABULARY, VocabularyActionTypes } from '../actions/types';
+import { VocabularyState, FILTER_VOCABULARY, ADD_WORD_TO_VOCABULARY, VocabularyActionTypes } from '../actions/types';
 
-const initialState: VocabularyArray = {
-    vocabulary: ['bad', 'star', 'bed', 'say', 'beautiful', 'through', 'against', 'cake']
+const initialState: VocabularyState = {
+    vocabulary: ['bad', 'star', 'bed', 'say', 'beautiful', 'through', 'against', 'cake'],
+    wordToLearn: []
 }
 
-export function vocabularyReducer(state = initialState, action: VocabularyActionTypes): VocabularyArray {
+export function vocabularyReducer(state = initialState, action: VocabularyActionTypes): VocabularyState {
     switch(action.type) {
         case FILTER_VOCABULARY:
             return {
@@ -12,7 +13,8 @@ export function vocabularyReducer(state = initialState, action: VocabularyAction
             };
         case  ADD_WORD_TO_VOCABULARY: 
             return {
-                ...state
+                ...state,
+                wordToLearn: [...state.wordToLearn, ...action.payload]               
             };
         default:
             return state;    
