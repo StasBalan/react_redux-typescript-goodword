@@ -4,7 +4,8 @@ import { INITIAL_RANGE } from '../constants/constants';
 import { AppState } from '../store/store';
 
 import { connect } from 'react-redux';
-import * as actions from '../actions/actions';
+import { filterVocabulary, addWordToVocabulary } from '../actions/vocabulary/actions';
+
 
 interface SettingsState {
     range: number;
@@ -77,4 +78,4 @@ const mapStateToProps = (state: AppState) => ({
     vocabulary: state.vocabulary.vocabulary
 });
 
-export default connect(mapStateToProps, actions)(Settings);
+export default connect(mapStateToProps, {filterVocabulary, addWordToVocabulary})(Settings);
