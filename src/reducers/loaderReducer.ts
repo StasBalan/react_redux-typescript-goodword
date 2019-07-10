@@ -1,7 +1,7 @@
 import {LoaderState, LoaderActionTypes, SHOWING_CARDS} from '../actions/loader/types';
 
 const initialState: LoaderState = {
-    loader: false
+    loader: true
 }
 
 export function loaderReducer(state = initialState, action: LoaderActionTypes ): LoaderState {
