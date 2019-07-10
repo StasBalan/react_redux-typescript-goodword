@@ -1,4 +1,4 @@
-import { VocabularyState, FILTER_VOCABULARY, ADD_WORD_TO_VOCABULARY, VocabularyActionTypes } from '../actions/types';
+import { VocabularyState, FILTER_VOCABULARY, ADD_WORD_TO_VOCABULARY, VocabularyActionTypes } from '../actions/vocabulary/types';
 
 const initialState: VocabularyState = {
     vocabulary: ['bad', 'star', 'bed', 'say', 'beautiful', 'through', 'against', 'cake'],
