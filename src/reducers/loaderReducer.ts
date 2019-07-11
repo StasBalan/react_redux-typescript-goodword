@@ -8,7 +8,8 @@ export function loaderReducer(state = initialState, action: LoaderActionTypes ):
     switch(action.type) {
         case SHOWING_CARDS:
             return {
-                loader: !state.loader
+                ...state,
+                loader: action.payload
             } 
         default:
             return state

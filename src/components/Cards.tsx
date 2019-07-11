@@ -32,7 +32,6 @@ class Cards extends Component<AppProps, CardsState> {
             fetch(`https://www.dictionaryapi.com/api/v3/references/sd4/json/${el}?key=${KEY}`)
                 .then((res: any) => res.json())
                 .then((data) => this.onShowFetching(data))
-                .then(() => this.props.showingCards(false))
         })
     }
 
@@ -51,6 +50,10 @@ class Cards extends Component<AppProps, CardsState> {
         this.setState({
             card: card
         });
+        
+        if(this.state.card) {
+            this.props.showingCards(false);
+        }
     }
 
     render() {

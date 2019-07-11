@@ -6,6 +6,7 @@ export interface LoaderState {
 
 interface showingCardsAction {
     type: typeof SHOWING_CARDS;
+    payload: Boolean
 }
 
 export type LoaderActionTypes = showingCardsAction;
