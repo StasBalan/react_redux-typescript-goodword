@@ -8,18 +8,20 @@ import { connect } from 'react-redux';
 import { showingCards } from '../actions/loader/actions';
 
 interface CardsState {
-    card: any[]
+    fetchingArray: any[];
+    card: any[];
 }
 
 interface AppProps {
     wordToLearn: string[];
     loader: Boolean;
-    showingCards: () => void;
+    showingCards: (bool: Boolean) => void;
 }
 
 class Cards extends Component<AppProps, CardsState> {
 
     state: CardsState = {
+       fetchingArray: [], 
        card: [] 
     }
 
@@ -29,19 +31,23 @@ class Cards extends Component<AppProps, CardsState> {
         wordToLearn.forEach((el) => {
             fetch(`https://www.dictionaryapi.com/api/v3/references/sd4/json/${el}?key=${KEY}`)
                 .then((res: any) => res.json())
-                .then((data) => this.onShowFetching(data));
+                .then((data) => this.onShowFetching(data))
+                .then(() => this.props.showingCards(false))
         })
     }
 
-    private onShowFetching = (arr: any[]) => {
-        const fetchingArray: any[] = [];
+    private onShowFetching = (data: any[]) => {
+        const fetchingArray = this.state.fetchingArray;
         const card: any[] = [];
-        fetchingArray.push(arr[0]);  
-        console.log('массив fetchingArray: ', fetchingArray, arr[0]);      
+        fetchingArray.push(data[0]);
+        // console.log('массив fetchingArray: ', fetchingArray); 
+        // console.log('массив с датой 0: ', data[0]);
+        // console.log('array with data: ', data);     
         fetchingArray.forEach((el) => {
-           card.push({title: el.meta.stems[0], description: el.shortdef[0]})
+            // console.log('элемент shortfed: ', el.shortdef[0])
+            card.push({title: el.meta.stems[0], description: el.shortdef[0]})
         });
-        console.log('массив card: ', card);
+        // console.log('массив card: ', card);
         this.setState({
             card: card
         });
@@ -54,7 +60,7 @@ class Cards extends Component<AppProps, CardsState> {
         return(
             <div>
                 <button onClick={this.onShow}>Show</button>
-                <CardsItems card={card}/>
+                {loader? <h1>loading...</h1> : <CardsItems card={card}/>}
             </div>
         );
     }
