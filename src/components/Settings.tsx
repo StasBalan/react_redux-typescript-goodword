@@ -43,7 +43,11 @@ class Settings extends Component<AppProps, SettingsState> {
 
         for (let i = 0; i < this.state.range; i++) {
             const rand = Math.floor(Math.random() * newVocabulary.length);
+            console.log('рандомная цифра: ', rand);
             wordsToLearn.push(newVocabulary[rand]);
+            console.log(`рандомное слово: ${newVocabulary[rand]} и тип равен: ${typeof newVocabulary[rand]}`);
+            newVocabulary.splice(rand, 1);
+            console.log(`обновленный основной массив равен: ${newVocabulary}`);
         }
 
         console.log(wordsToLearn, newVocabulary);
@@ -52,6 +56,10 @@ class Settings extends Component<AppProps, SettingsState> {
             this.props.addWordToVocabulary(wordsToLearn);
             this.props.filterVocabulary(newVocabulary);
         }
+
+        this.setState({
+            range: 1
+        })
     }
 
     render() {
