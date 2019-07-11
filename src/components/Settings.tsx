@@ -58,7 +58,7 @@ class Settings extends Component<AppProps, SettingsState> {
         }
 
         this.setState({
-            range: 1
+            range: INITIAL_RANGE
         })
     }
 
