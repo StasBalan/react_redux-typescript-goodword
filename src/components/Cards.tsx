@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { showingCards } from '../actions/loader/actions';
 
 interface CardsState {
-    fetchingArray: any[];
+    wordsFromServer: Object;
     card: any[];
 }
 
@@ -21,36 +21,48 @@ interface AppProps {
 class Cards extends Component<AppProps, CardsState> {
 
     state: CardsState = {
-       fetchingArray: [], 
+       wordsFromServer: {}, 
        card: [] 
     }
 
     private onShow = () => {
-        const wordToLearn = this.props.wordToLearn;
+        const {wordToLearn} = this.props;
+        const {wordsFromServer} = this.state;
+        
+        const storedWords = Object.keys(wordsFromServer);
+        const newWords = wordToLearn.filter(word => !storedWords.includes(word))
+      
         console.log('пришел массив в Cards: ', wordToLearn);
-        wordToLearn.forEach((el) => {
+      
+        // проверить есть ли новые слова у нас в локальном стейте
+        newWords.forEach((el: string) => {
             fetch(`https://www.dictionaryapi.com/api/v3/references/sd4/json/${el}?key=${KEY}`)
                 .then((res: any) => res.json())
-                .then((data) => this.onShowFetching(data))
+                .then((data) => this.onShowFetching(data, el))
         })
     }
 
-    private onShowFetching = (data: any[]) => {
-        const fetchingArray = this.state.fetchingArray;
-        const card: any[] = [];
-        fetchingArray.push(data[0]);
+    private onShowFetching = (data: any[], key: string) => {
+        const {wordsFromServer, card} = this.state;
+        
+        const newCard: any[] = [];
+        const serverResponse = data[0]
+  
         // console.log('массив fetchingArray: ', fetchingArray); 
         // console.log('массив с датой 0: ', data[0]);
         // console.log('array with data: ', data);     
-        fetchingArray.forEach((el) => {
-            // console.log('элемент shortfed: ', el.shortdef[0])
-            card.push({title: el.meta.stems[0], description: el.shortdef[0]})
-        });
+        
+        card.push({title: serverResponse.meta.stems[0], description: serverResponse.shortdef[0]})
+       
         // console.log('массив card: ', card);
         this.setState({
-            card: card
+            card: [...card, ...newCard],
+            wordsFromServer: {
+                ...wordsFromServer,
+                [key]: data[0]
+            }
         });
-        
+
         if(this.state.card) {
             this.props.showingCards(false);
         }
