@@ -1,16 +1,45 @@
 import React, { Component } from 'react';
 
+import CardInfo from '../components/CardInfo';
+
+interface Card {
+    title: string;
+    description: string;
+}
+
 interface CardsItemsProps {
     card: any[];
 }
 
-class CardsItems extends Component<CardsItemsProps> {
+interface CardsItemsState {
+    isShowingCardInfo: Boolean;
+    cardInfoTitle: string;
+    cardInfoDescription: string;
+}
+
+class CardsItems extends Component<CardsItemsProps, CardsItemsState> {
+    
+    state: CardsItemsState = {
+        isShowingCardInfo: false,
+        cardInfoTitle: '',
+        cardInfoDescription: ''
+    }
+
+    private handleOpenCardInfo = (el: Card) => {
+        this.setState({
+            isShowingCardInfo: true,
+            cardInfoTitle: el.title,
+            cardInfoDescription: el.description
+        });
+    }
+
     render() {
         const { card } = this.props;
+        const { isShowingCardInfo, cardInfoTitle, cardInfoDescription } = this.state;
 
         const elementsCard = card.map((el, index) => {
             return (
-                <li key={index} style={{listStyle: 'none',
+                <li onClick={() => this.handleOpenCardInfo(el)} key={index} style={{listStyle: 'none',
                                         width: '300px',
                                         backgroundColor: '#282c34', 
                                         color: '#ffffff',
@@ -23,9 +52,12 @@ class CardsItems extends Component<CardsItemsProps> {
         });
         
         return(
-            <ul>
-                {elementsCard}
-            </ul>
+            <>
+                <ul>
+                    {elementsCard}
+                </ul>
+                {isShowingCardInfo ? <CardInfo title={cardInfoTitle} description={cardInfoDescription}/> : null}
+            </>    
         );
     }
 }
