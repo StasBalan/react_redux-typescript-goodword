@@ -56,7 +56,7 @@ class CardsItems extends Component<CardsItemsProps, CardsItemsState> {
                 <ul>
                     {elementsCard}
                 </ul>
-                {isShowingCardInfo ? <CardInfo cardInfoTitle={cardInfoTitle} cardInfoDescription={cardInfoDescription}/> : null}
+                {isShowingCardInfo ? <CardInfo cardTitle={cardInfoTitle} cardDescription={cardInfoDescription}/> : null}
             </>    
         );
     }
