@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import CardInfo from '../components/CardInfo';
-
+import  CardInfo  from './CardInfo';
+ 
 interface Card {
     title: string;
     description: string;
@@ -56,7 +56,7 @@ class CardsItems extends Component<CardsItemsProps, CardsItemsState> {
                 <ul>
                     {elementsCard}
                 </ul>
-                {isShowingCardInfo ? <CardInfo title={cardInfoTitle} description={cardInfoDescription}/> : null}
+                {isShowingCardInfo ? <CardInfo cardInfoTitle={cardInfoTitle} cardInfoDescription={cardInfoDescription}/> : null}
             </>    
         );
     }
