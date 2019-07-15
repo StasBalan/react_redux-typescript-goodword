@@ -5,6 +5,10 @@ export interface FavoritesState {
     description: string;
 }
 
+export interface FavoritesCards {
+    favoritesCards: FavoritesState[]
+}
+
 interface saveInFavoritesAction {
     type: typeof SAVE_IN_FAVORITES;
     payload: FavoritesState[];
