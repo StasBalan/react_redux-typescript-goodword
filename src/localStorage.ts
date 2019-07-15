@@ -1,3 +1,5 @@
+import { FavoritesState } from './actions/localStorage/types';
+
 export const loadState = () => {
     try {
         const serializedState = localStorage.getItem('state');
@@ -10,7 +12,7 @@ export const loadState = () => {
     }
 };
 
-export const saveState = (state: FavoritesCards[]) => {
+export const saveState = (state: FavoritesState[]) => {
     console.log('сохраняем стейт в localStorage', state)
     try {
         const serializedState = JSON.stringify(state);
