@@ -21,7 +21,7 @@ declare global {
    
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const persistedState = loadState() || initialState; 
+const persistedState = loadState() || initialState.vocabulary; 
 
 export const store = createStore(rootReducer, persistedState, composeEnhancers());
 

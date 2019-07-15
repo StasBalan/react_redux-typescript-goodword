@@ -11,7 +11,7 @@ export interface FavoritesCards {
 
 interface saveInFavoritesAction {
     type: typeof SAVE_IN_FAVORITES;
-    payload: FavoritesCards;
+    payload: FavoritesState[];
 }
 
 export type FavoritesActionType = saveInFavoritesAction;

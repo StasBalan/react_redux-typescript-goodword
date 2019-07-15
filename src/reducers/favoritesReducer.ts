@@ -8,7 +8,8 @@ export function favoritesReducer(state = initialState, actions: FavoritesActionT
     switch(actions.type) {
         case SAVE_IN_FAVORITES:
             return {
-                ...state
+                ...state,
+                favoritesCards: [...state.favoritesCards, ...actions.payload]
             }
         default:
             return state;    

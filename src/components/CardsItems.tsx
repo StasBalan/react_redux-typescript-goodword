@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import { saveInFavorites } from '../actions/localStorage/actions';
+import { connect } from 'react-redux';
+
+import { FavoritesState } from '../actions/localStorage/types';
+
 import  CardInfo  from './CardInfo';
  
 interface Card {
@@ -9,6 +14,7 @@ interface Card {
 
 interface CardsItemsProps {
     card: any[];
+    saveInFavorites: (el: FavoritesState[]) => void;
 }
 
 interface CardsItemsState {
@@ -33,6 +39,11 @@ class CardsItems extends Component<CardsItemsProps, CardsItemsState> {
         });
     }
 
+    private onAddFavorites = (el: Card) => {
+        const favorites = [];
+        favorites.push({title: el.title, description: el.description});
+        this.props.saveInFavorites(favorites);
+    }
     render() {
         const { card } = this.props;
         const { isShowingCardInfo, cardInfoTitle, cardInfoDescription } = this.state;
@@ -47,6 +58,7 @@ class CardsItems extends Component<CardsItemsProps, CardsItemsState> {
                                         margin: '10px auto'}}>
                     <p>{el.title}</p>
                     <p>{el.description}</p>
+                    <button onClick={() => this.onAddFavorites(el)}>add</button>
                 </li>
             );
         });
@@ -62,4 +74,4 @@ class CardsItems extends Component<CardsItemsProps, CardsItemsState> {
     }
 }
 
-export default CardsItems;
+export default connect(null, { saveInFavorites })(CardsItems);
