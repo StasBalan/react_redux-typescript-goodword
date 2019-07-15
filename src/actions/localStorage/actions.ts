@@ -1,6 +1,6 @@
-import {SAVE_IN_FAVORITES, FavoritesState, FavoritesActionType} from './types';
+import {SAVE_IN_FAVORITES, FavoritesCards, FavoritesActionType} from './types';
 
-export function saveInFavorites(payload: FavoritesState[]): FavoritesActionType {
+export function saveInFavorites(payload: FavoritesCards): FavoritesActionType {
     return {
         type: SAVE_IN_FAVORITES,
         payload: payload

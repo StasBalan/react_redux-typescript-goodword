@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import { createStore, compose } from 'redux';
 import { vocabularyReducer } from '../reducers/vocabularyReducer';
+import { initialState } from '../reducers/vocabularyReducer';
+import { favoritesReducer } from '../reducers/favoritesReducer';
 import { loaderReducer } from '../reducers/loaderReducer';
 import { loadState, saveState } from '../localStorage';
-import { initialState } from '../reducers/vocabularyReducer';
+
 
 const rootReducer = combineReducers({
     vocabulary: vocabularyReducer,
@@ -24,7 +26,7 @@ const persistedState = loadState() || initialState;
 export const store = createStore(rootReducer, persistedState, composeEnhancers());
 
 store.subscribe(() => {
-  saveState({FavoritesCards: store.getState().favorites})
+  saveState({favoritesCards: store.getState().favorites})
 });
 
 export type AppState = ReturnType<typeof rootReducer>

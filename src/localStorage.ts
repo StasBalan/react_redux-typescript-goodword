@@ -1,4 +1,8 @@
-import { FavoritesState } from './actions/localStorage/types';
+import { FavoritesCards } from './actions/localStorage/types';
+
+interface LocalStorageInterface {
+    favoritesCards: FavoritesCards
+}
 
 export const loadState = () => {
     try {
@@ -12,7 +16,7 @@ export const loadState = () => {
     }
 };
 
-export const saveState = (state: FavoritesState[]) => {
+export const saveState = (state: LocalStorageInterface) => {
     console.log('сохраняем стейт в localStorage', state)
     try {
         const serializedState = JSON.stringify(state);
