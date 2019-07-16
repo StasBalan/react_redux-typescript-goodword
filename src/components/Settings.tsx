@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './style.css';
+
 import { INITIAL_RANGE } from '../constants/constants';
 import { AppState } from '../store/store';
 import Header from './Header';
@@ -67,18 +69,24 @@ class Settings extends Component<AppProps, SettingsState> {
         const { range } = this.state;
 
         return (
-            <div>
+            <div className='settings'>
                 <Header/>
-                <div>
-                    <p>{range}</p>
-                    <input onChange={this.handleChange}
-                        value={range} 
-                        type="range" 
-                        min='1' 
-                        max='12' 
-                        step='1'/>
+                <div className='container'>
+                    <div className='page__header'>
+                        <i className="material-icons">settings_applications</i>
+                        <h2 className='subtitle'>Settings</h2>
+                    </div>
+                    <div className='settings__inner'>
+                        <p className='settings__value'>{range}</p>
+                        <input onChange={this.handleChange}
+                            value={range} 
+                            type="range" 
+                            min='1' 
+                            max='12' 
+                            step='1'/>
+                        <button className='settings__button' onClick={this.onSave}>SAVE</button>
+                    </div>    
                 </div>
-                <button onClick={this.onSave}>SAVE</button>
             </div>
         );
     }

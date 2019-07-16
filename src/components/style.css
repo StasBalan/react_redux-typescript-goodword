@@ -11,6 +11,21 @@
     text-align: center;
 }
 
+.subtitle {
+    color: #95a5a6;
+    font-size: 19px;
+}
+
+.material-icons {
+    font-size: 40px;
+    color: #95a5a6;
+}
+
+.page__header {
+    display: flex;
+    align-items: center;  
+}
+
 
 .header {
     height: 100px;
@@ -65,7 +80,31 @@
 
 
 .home__img {
-    width: 700px;
     display: block;
+    width: 700px;
     margin: 0 auto;
+}
+
+
+.settings__inner {
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #3498db;
+    border-radius: 5px;
+}
+
+.settings__value {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+}
+
+.settings__button {
+    margin-top: 30px;
 }
