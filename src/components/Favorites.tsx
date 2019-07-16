@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Header from './Header';
+
 import { AppState } from '../store/store';
 import { connect } from 'react-redux';
 
@@ -41,6 +43,7 @@ class Favorites extends React.Component<FavoritesProps> {
 
         return (
             <div>
+                <Header/>
                 <h1>Favorites Card</h1>
                 {elementsFavorites}
             </div>

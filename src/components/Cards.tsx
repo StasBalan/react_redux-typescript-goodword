@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { AppState } from '../store/store';
 import CardsItems from './CardsItems';
+import Header from './Header';
 // import { KEY } from '../constants/constants';
 
 import { connect } from 'react-redux';
@@ -74,6 +75,7 @@ class Cards extends Component<AppProps, CardsState> {
 
         return(
             <div>
+                <Header/>
                 <button onClick={this.onShow}>Show</button>
                 {loader? <h1>loading...</h1> : <CardsItems card={cardData}/>}
             </div>

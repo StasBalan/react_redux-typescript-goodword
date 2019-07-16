@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { INITIAL_RANGE } from '../constants/constants';
 import { AppState } from '../store/store';
+import Header from './Header';
 
 import { connect } from 'react-redux';
 import { filterVocabulary, addWordToVocabulary } from '../actions/vocabulary/actions';
@@ -67,6 +68,7 @@ class Settings extends Component<AppProps, SettingsState> {
 
         return (
             <div>
+                <Header/>
                 <div>
                     <p>{range}</p>
                     <input onChange={this.handleChange}
