@@ -3,6 +3,7 @@ import './App.css';
 
 import Settings from '../../components/Settings';
 import Cards from '../../components/Cards';
+import Favorites from '../../components/Favorites';
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       </header>
       <Settings/>
       <Cards/>
+      <Favorites/>
     </div>
   );
 }
