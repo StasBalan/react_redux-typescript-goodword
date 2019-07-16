@@ -34,6 +34,7 @@ class Header extends Component<{}, MenuInterface> {
 
         return(
             <div>
+                <h3>GOODWORD</h3>
                 <ul>
                     {elementsHeader}
                 </ul>
