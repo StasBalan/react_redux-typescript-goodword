@@ -1,16 +1,19 @@
 import { combineReducers } from 'redux';
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware  } from 'redux';
+import thunk from 'redux-thunk';
 import { vocabularyReducer } from '../reducers/vocabularyReducer';
 import { initialState } from '../reducers/vocabularyReducer';
 import { favoritesReducer } from '../reducers/favoritesReducer';
 import { loaderReducer } from '../reducers/loaderReducer';
+import { saveCardDataReducer } from '../reducers/saveCardDataReducer';
 import { loadState, saveState } from '../localStorage';
 
 
 const rootReducer = combineReducers({
     vocabulary: vocabularyReducer,
     loader: loaderReducer,
-    favorites: favoritesReducer
+    favorites: favoritesReducer,
+    cardData: saveCardDataReducer
 })
 
 declare global {
@@ -23,7 +26,7 @@ declare global {
 
 const persistedState = loadState() || initialState.vocabulary; 
 
-export const store = createStore(rootReducer, persistedState, composeEnhancers());
+export const store = createStore(rootReducer, persistedState, composeEnhancers(applyMiddleware(thunk)) );
 
 store.subscribe(() => {
   saveState({favoritesCards: store.getState().favorites})

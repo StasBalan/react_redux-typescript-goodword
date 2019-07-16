@@ -1,6 +1,6 @@
 import { SHOWING_CARDS, LoaderActionTypes } from './types';
 
-export function showingCards(payload: Boolean): LoaderActionTypes {
+export function isLoading(payload: Boolean): LoaderActionTypes {
     return {
         type: SHOWING_CARDS,
         payload: payload

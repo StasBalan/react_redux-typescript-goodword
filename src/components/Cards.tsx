@@ -2,27 +2,30 @@ import React, { Component } from 'react';
 
 import { AppState } from '../store/store';
 import CardsItems from './CardsItems';
-import { KEY } from '../constants/constants';
+// import { KEY } from '../constants/constants';
 
 import { connect } from 'react-redux';
-import { showingCards } from '../actions/loader/actions';
+import { isLoading } from '../actions/loader/actions';
+import { fetchNewWords } from '../actions/effects/fetchNewWords';
+
+import { CardDataState } from '../actions/effects/types';
 
 interface CardsState {
     wordsFromServer: Object;
-    card: any[];
 }
 
 interface AppProps {
     wordToLearn: string[];
     loader: Boolean;
-    showingCards: (bool: Boolean) => void;
+    isLoading: (bool: Boolean) => void;
+    fetchNewWords: (array: string[]) => void;
+    cardData: CardDataState[]
 }
 
 class Cards extends Component<AppProps, CardsState> {
 
     state: CardsState = {
        wordsFromServer: {}, 
-       card: [] 
     }
 
     private onShow = () => {
@@ -35,47 +38,44 @@ class Cards extends Component<AppProps, CardsState> {
         console.log('пришел массив в Cards: ', wordToLearn);
       
         // проверить есть ли новые слова у нас в локальном стейте
-        newWords.forEach((el: string) => {
-            fetch(`https://www.dictionaryapi.com/api/v3/references/sd4/json/${el}?key=${KEY}`)
-                .then((res: any) => res.json())
-                .then((data) => this.onShowFetching(data, el))
-        })
+        this.props.fetchNewWords(newWords);
     }
 
-    private onShowFetching = (data: any[], key: string) => {
-        const {wordsFromServer, card} = this.state;
+    // private onShowFetching = (data: any[], key: string) => {
+    //     const {wordsFromServer, card} = this.state;
         
-        const newCard: any[] = [];
-        const serverResponse = data[0]
+    //     const newCard: any[] = [];
+    //     const serverResponse = data[0]
   
-        // console.log('массив fetchingArray: ', fetchingArray); 
-        // console.log('массив с датой 0: ', data[0]);
-        // console.log('array with data: ', data);     
+    //     // console.log('массив fetchingArray: ', fetchingArray); 
+    //     // console.log('массив с датой 0: ', data[0]);
+    //     // console.log('array with data: ', data);     
         
-        card.push({title: serverResponse.meta.stems[0], description: serverResponse.shortdef[0]})
+    //     card.push({title: serverResponse.meta.stems[0], description: serverResponse.shortdef[0]})
        
-        // console.log('массив card: ', card);
-        this.setState({
-            card: [...card, ...newCard],
-            wordsFromServer: {
-                ...wordsFromServer,
-                [key]: data[0]
-            }
-        });
+    //     // console.log('массив card: ', card);
+    //     this.setState({
+    //         card: [...card, ...newCard],
+    //         wordsFromServer: {
+    //             ...wordsFromServer,
+    //             [key]: data[0]
+    //         }
+    //     });
 
-        if(this.state.card) {
-            this.props.showingCards(false);
-        }
-    }
+    //     if(this.state.card) {
+    //         this.props.isLoading(false);
+    //     }
+    // }
 
     render() {
-        const { loader } = this.props;
-        const { card } = this.state;
+        console.log('props', this.props);
+        const { loader, cardData } = this.props;
+        
 
         return(
             <div>
                 <button onClick={this.onShow}>Show</button>
-                {loader? <h1>loading...</h1> : <CardsItems card={card}/>}
+                {loader? <h1>loading...</h1> : <CardsItems card={cardData}/>}
             </div>
         );
     }
@@ -83,7 +83,8 @@ class Cards extends Component<AppProps, CardsState> {
 
 const mapStateToProps = (state: AppState) => ({
     wordToLearn: state.vocabulary.wordToLearn,
-    loader: state.loader.loader 
+    loader: state.loader.loader,
+    cardData: state.cardData.cardData 
 })
 
-export default connect(mapStateToProps, { showingCards }) (Cards);
+export default connect(mapStateToProps, { isLoading, fetchNewWords}) (Cards);

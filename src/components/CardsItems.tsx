@@ -13,7 +13,7 @@ interface Card {
 }
 
 interface CardsItemsProps {
-    card: any[];
+    card: Card[];
     saveInFavorites: (el: FavoritesState[]) => void;
 }
 
