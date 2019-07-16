@@ -25,11 +25,12 @@ declare global {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistedState = loadState() || initialState.vocabulary; 
+console.log('persistedState', persistedState);
 
 export const store = createStore(rootReducer, persistedState, composeEnhancers(applyMiddleware(thunk)) );
 
 store.subscribe(() => {
-  saveState({favoritesCards: store.getState().favorites})
+  saveState({favorites: store.getState().favorites})
 });
 
 export type AppState = ReturnType<typeof rootReducer>

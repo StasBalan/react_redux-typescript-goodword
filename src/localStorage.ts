@@ -1,12 +1,13 @@
 import { FavoritesCards } from './actions/localStorage/types';
 
 interface LocalStorageInterface {
-    favoritesCards: FavoritesCards
+    favorites: FavoritesCards
 }
 
 export const loadState = () => {
     try {
         const serializedState = localStorage.getItem('state');
+        console.log('serializedState', serializedState);
         if (serializedState === null){
             return undefined;
         }
