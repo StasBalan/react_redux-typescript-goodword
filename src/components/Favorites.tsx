@@ -23,9 +23,12 @@ const Favorites: React.FC<FavoritesProps> = ({ favorites }) => {
         );
     })
     return (
-        <ul>
-            {elementsFavorites}
-        </ul>
+        <div>
+            <h1>Favorites Card</h1>
+            <ul>
+                {elementsFavorites}
+            </ul>
+        </div>
     );
 }
 
