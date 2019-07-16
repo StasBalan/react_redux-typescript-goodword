@@ -62,3 +62,10 @@
 .header-item__link:hover::after {
     width: 100%;
 }
+
+
+.home__img {
+    width: 700px;
+    display: block;
+    margin: 0 auto;
+}
