@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import './style.css';
+
 interface HeaderState {
     title: string;
     route: string;
@@ -34,10 +36,12 @@ class Header extends Component<{}, MenuInterface> {
 
         return(
             <div className='header'>
-                <h3 className='header__title'>GOODWORD</h3>
-                <ul className='header__menu'>
-                    {elementsHeader}
-                </ul>
+                <div className='container header__container'>
+                    <h3 className='header__title'>GOODWORD</h3>
+                    <ul className='header__menu'>
+                        {elementsHeader}
+                    </ul>
+                </div>
             </div>
         );
     }
