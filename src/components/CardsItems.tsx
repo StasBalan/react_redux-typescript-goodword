@@ -50,22 +50,17 @@ class CardsItems extends Component<CardsItemsProps, CardsItemsState> {
 
         const elementsCard = card.map((el, index) => {
             return (
-                <li onClick={() => this.handleOpenCardInfo(el)} key={index} style={{listStyle: 'none',
-                                        width: '300px',
-                                        backgroundColor: '#282c34', 
-                                        color: '#ffffff',
-                                        padding: '5px',
-                                        margin: '10px auto'}}>
+                <li onClick={() => this.handleOpenCardInfo(el)} key={index} className='cards-list__items'>
                     <p>{el.title}</p>
                     <p>{el.description}</p>
-                    <button onClick={() => this.onAddFavorites(el)}>add</button>
+                    <button onClick={() => this.onAddFavorites(el)}>Add to favorites</button>
                 </li>
             );
         });
         
         return(
             <>
-                <ul>
+                <ul className='cards-list'>
                     {elementsCard}
                 </ul>
                 {isShowingCardInfo ? <CardInfo cardTitle={cardInfoTitle} cardDescription={cardInfoDescription}/> : null}
