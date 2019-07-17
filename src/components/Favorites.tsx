@@ -19,12 +19,7 @@ class Favorites extends React.Component<FavoritesProps> {
     private renderFavorites = (favorites: FavoritesState[]) => (
         favorites.map((el, index) => {
                 return (
-                    <li key={index} style={{listStyle: 'none',
-                                            width: '300px',
-                                            backgroundColor: '#282c34', 
-                                            color: '#ffffff',
-                                            padding: '5px',
-                                            margin: '10px auto'}}>
+                    <li key={index} className='cards-list__items'>
                         <p>{el.title}</p>
                         <p>{el.description}</p>
                     </li>
@@ -42,10 +37,17 @@ class Favorites extends React.Component<FavoritesProps> {
         console.log('elementsFavorites', elementsFavorites);
 
         return (
-            <div>
+            <div className='favorites'>
                 <Header/>
-                <h1>Favorites Card</h1>
-                {elementsFavorites}
+                <div className='container'>
+                    <div className='page__header'>
+                        <i className="material-icons">star</i>
+                        <h2 className='subtitle'>Favorites Cards</h2>
+                    </div>
+                    <div className='favorites__inner'>
+                        {elementsFavorites}
+                    </div> 
+                </div>
             </div>
         );
     }
