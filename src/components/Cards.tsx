@@ -3,12 +3,10 @@ import React, { Component } from 'react';
 import { AppState } from '../store/store';
 import CardsItems from './CardsItems';
 import Header from './Header';
-// import { KEY } from '../constants/constants';
 
 import { connect } from 'react-redux';
 import { isLoading } from '../actions/loader/actions';
 import { fetchNewWords } from '../actions/effects/fetchNewWords';
-
 import { CardDataState } from '../actions/effects/types';
 
 interface CardsState {
@@ -42,42 +40,24 @@ class Cards extends Component<AppProps, CardsState> {
         this.props.fetchNewWords(newWords);
     }
 
-    // private onShowFetching = (data: any[], key: string) => {
-    //     const {wordsFromServer, card} = this.state;
-        
-    //     const newCard: any[] = [];
-    //     const serverResponse = data[0]
-  
-    //     // console.log('массив fetchingArray: ', fetchingArray); 
-    //     // console.log('массив с датой 0: ', data[0]);
-    //     // console.log('array with data: ', data);     
-        
-    //     card.push({title: serverResponse.meta.stems[0], description: serverResponse.shortdef[0]})
-       
-    //     // console.log('массив card: ', card);
-    //     this.setState({
-    //         card: [...card, ...newCard],
-    //         wordsFromServer: {
-    //             ...wordsFromServer,
-    //             [key]: data[0]
-    //         }
-    //     });
-
-    //     if(this.state.card) {
-    //         this.props.isLoading(false);
-    //     }
-    // }
-
     render() {
         console.log('props', this.props);
         const { loader, cardData } = this.props;
         
 
         return(
-            <div>
+            <div className='card'>
                 <Header/>
-                <button onClick={this.onShow}>Show</button>
-                {loader? <h1>loading...</h1> : <CardsItems card={cardData}/>}
+                <div className='container'>
+                    <div className='page__header'>
+                        <i className="material-icons">list_alt</i>
+                        <h2 className='subtitle'>Cards</h2>
+                    </div>
+                    <div className='card__inner'>
+                        <button className='card__button' onClick={this.onShow}>Show</button>
+                        {loader? <div className='box-loader'><span className="load"/></div> : <CardsItems card={cardData}/>}
+                    </div>
+                </div>
             </div>
         );
     }
