@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/stasbalan.github.io/react_redux-typescript-goodword/precache-manifest.4beaf80b4c8e7670390f35c8439867b7.js"
+  "/StasBalan.github.io/react_redux-typescript-goodword/precache-manifest.1221a8ec42898458ffdcdfad691d2da8.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -33,7 +33,7 @@ workbox.core.clientsClaim();
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/stasbalan.github.io/react_redux-typescript-goodword/index.html"), {
+workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/StasBalan.github.io/react_redux-typescript-goodword/index.html"), {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
